@@ -38,6 +38,7 @@ pkgs.dockerTools.buildLayeredImage rec {
   tag = "latest";
   contents = [
     rootfs
+    apacheHttpd
     tzdata
     locale
     sendmail
