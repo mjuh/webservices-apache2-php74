@@ -53,7 +53,6 @@ pkgs.dockerTools.buildLayeredImage rec {
     zlib
     connectorc
   ]
-  ++ collect isDerivation mjperl5Packages
   ++ collect isDerivation phpPackages.php74Packages;
   config = {
     Entrypoint = [ "${rootfs}/init" ];
