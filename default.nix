@@ -22,7 +22,6 @@ let
       mjHttpErrorPages s6 execline;
     php74 = php.php74;
     postfix = sendmail;
-    mjperl5Packages = mjperl5lib;
 #    ioncube = ioncube.v74;
     s6PortableUtils = s6-portable-utils;
     s6LinuxUtils = s6-linux-utils;
