@@ -32,7 +32,7 @@ let
 in
 
 pkgs.dockerTools.buildLayeredImage rec {
-  maxLayers = 3;
+  maxLayers = 124;
   name = "docker-registry.intr/webservices/apache2-php74";
   tag = "latest";
   contents = [
@@ -50,7 +50,7 @@ pkgs.dockerTools.buildLayeredImage rec {
     gcc-unwrapped.lib
     glibc
     zlib
-    connectorc
+    connectorc perl520
   ]
   ++ collect isDerivation phpPackages.php74Packages;
   config = {
