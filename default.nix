@@ -67,7 +67,8 @@ pkgs.dockerTools.buildLayeredImage rec {
       ru.majordomo.docker.cmd = dockerRunCmd php74DockerArgHints "${name}:${tag}";
       ru.majordomo.docker.exec.reload-cmd = "${apacheHttpd}/bin/httpd -d ${rootfs}/etc/httpd -k graceful";
     };
-    extraCommands = ''
+  };
+  extraCommands = ''
       set -xe
       ls
       mkdir -p etc
@@ -79,5 +80,4 @@ pkgs.dockerTools.buildLayeredImage rec {
       ln -s /bin usr/sbin
       ln -s /bin usr/local/bin
     '';
-  };
 }
