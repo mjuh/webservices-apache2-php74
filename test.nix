@@ -36,6 +36,16 @@ in maketestPhp {
         "/tmp/xchg/coverage-data/phpinfo.html";
     })
     (dockerNodeTest {
+      description = "ugly GD test";
+      action = "succeed";
+      command = runCurlGrep "127.0.0.1/phpinfo.php" "'GD Support'";
+    })
+    (dockerNodeTest {
+      description = "ugly Zip test";
+      action = "succeed";
+      command = runCurlGrep "127.0.0.1/phpinfo.php" "'Zip.*enabled'";
+    })
+    (dockerNodeTest {
       description = "Fetch server-status.";
       action = "succeed";
       command = runCurl "http://127.0.0.1/server-status"
