@@ -25,10 +25,6 @@ fileExistenceTests:
     permissions: 'dtrwxrwxrwx'
 
 commandTests:
-  - name: 'perl version'
-    command: 'perl'
-    args: [ '-v' ]
-    exitCode: 0
   - name: 'optipng version'
     command: 'optipng'
     args: [ '-v' ]

@@ -50,7 +50,6 @@ pkgs.dockerTools.buildLayeredImage rec {
     glibc
     zlib
     mariadbConnectorC
-    perl520
   ]
   ++ collect isDerivation php74Packages;
   config = {
