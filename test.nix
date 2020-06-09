@@ -20,6 +20,7 @@ in maketestPhp {
   inherit debug;
   php = php74;
   inherit containerStructureTestConfig;
+  testApachePHPwithPerl = false;
   rootfs = ./rootfs;
   testSuite = [
     (dockerNodeTest {
