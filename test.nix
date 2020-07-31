@@ -29,6 +29,19 @@ in maketestPhp {
       command = "cp -v ${phpinfo} /home/u12/${domain}/www/phpinfo.php";
     })
     (dockerNodeTest {
+      description = "Copy example pdf.";
+      action = "execute";
+      command = "cp -v ${./tests/example.pdf} /home/u12/${domain}/www/example.pdf";
+    })
+    (dockerNodeTest {
+      description = "Test imageMagick convert pdf";
+      action = "succeed";
+      command = ''#!{bash}/bin/bash
+          docker exec `docker ps --format '{{ .Names }}' ` convert -density 100 -colorspace rgb /home/u12/${domain}/www/example.pdf  -scale 200x200 /home/u12/${domain}/www/example.jpg && cp /home/u12/${domain}/www/example.jpg /tmp/xchg/coverage-data/pdf2jpg.jpg
+      '';
+    })
+
+    (dockerNodeTest {
       description = "Fetch phpinfo.";
       action = "succeed";
       command = runCurl "http://${domain}/phpinfo.php"
