@@ -20,7 +20,7 @@ let
     name = "apache2-rootfs-php74";
     src = ./rootfs;
     inherit zlib curl coreutils findutils apacheHttpdmpmITK apacheHttpd
-      mjHttpErrorPages s6 execline php74;
+      mjHttpErrorPages s6 execline php74 logger;
     postfix = sendmail;
 #    ioncube = ioncube.v74;
     s6PortableUtils = s6-portable-utils;
@@ -52,6 +52,7 @@ pkgs.dockerTools.buildLayeredImage rec {
     glibc
     zlib
     mariadbConnectorC
+    logger
   ]
   ++ collect isDerivation php74Packages;
   config = {
