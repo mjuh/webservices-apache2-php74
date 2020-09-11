@@ -18,7 +18,6 @@ let
 
 in maketestPhp {
   inherit image;
-  inherit debug;
   php = php74;
   inherit containerStructureTestConfig;
   testApachePHPwithPerl = false;
