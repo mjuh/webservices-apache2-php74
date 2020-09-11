@@ -22,7 +22,7 @@ let
     inherit zlib curl coreutils findutils apacheHttpdmpmITK apacheHttpd
       mjHttpErrorPages s6 execline php74 logger;
     postfix = sendmail;
-#    ioncube = ioncube.v74;
+    ioncube = ioncube.v74;
     s6PortableUtils = s6-portable-utils;
     s6LinuxUtils = s6-linux-utils;
     mimeTypes = mime-types;
