@@ -48,6 +48,7 @@ pkgs.dockerTools.buildLayeredImage rec {
     zlib
     mariadbConnectorC
     logger
+    openssl-with-engine-gost
   ]
   ++ collect isDerivation php74Packages;
   config = {
@@ -60,6 +61,7 @@ pkgs.dockerTools.buildLayeredImage rec {
       "LC_ALL=en_US.UTF-8"
       "LD_PRELOAD=${jemalloc}/lib/libjemalloc.so"
       "PERL5LIB=${mjPerlPackages.PERL5LIB}"
+      "OPENSSL_CONF=/etc/ssl/openssl.cnf"
     ];
     Labels = flattenSet rec {
       ru.majordomo.docker.arg-hints-json = builtins.toJSON php74DockerArgHints;
