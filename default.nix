@@ -49,6 +49,9 @@ pkgs.dockerTools.buildLayeredImage rec {
     mariadbConnectorC
     logger
     openssl-with-engine-gost
+    gifsicle
+    ghostscript
+    nodePackages.svgo
   ]
   ++ collect isDerivation php74Packages;
   config = {
