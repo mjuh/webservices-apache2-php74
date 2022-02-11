@@ -1,13 +1,13 @@
-{ nixpkgs }:
+{ pkgs }:
 
-with nixpkgs;
+with pkgs;
 
 let
   domain = "php74.ru";
   phpVersion = "php" + lib.versions.major php74.version
     + lib.versions.minor php74.version;
   containerStructureTestConfig = ./tests/container-structure-test.yaml;
-  image = callPackage ./default.nix { inherit nixpkgs; };
+  image = callPackage ./default.nix { inherit pkgs; };
 
 in maketestPhp {
   inherit image;
@@ -123,9 +123,8 @@ in maketestPhp {
       description = "Run container structure test.";
       action = "succeed";
       command = containerStructureTest {
-        inherit pkgs;
+        inherit image pkgs;
         config = containerStructureTestConfig;
-        image = image.imageName;
       };
     })
     (dockerNodeTest {

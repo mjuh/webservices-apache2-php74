@@ -1,6 +1,6 @@
-{ nixpkgs }:
+{ pkgs }:
 
-with nixpkgs;
+with pkgs;
 
 let
   inherit (builtins) concatMap getEnv toJSON;

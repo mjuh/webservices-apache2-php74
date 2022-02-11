@@ -3,17 +3,24 @@
 
   inputs.majordomo.url = "git+https://gitlab.intr/_ci/nixpkgs";
 
-  outputs = { self, nixpkgs, majordomo }: {
+  outputs = { self, nixpkgs, majordomo }:
+    let
+      system = "x86_64-linux";
+      pkgs = import majordomo.inputs.nixpkgs {
+        overlays = [ majordomo.overlay self.overlay ];
+        inherit system;
+      };
+    in {
+      overlay = final: prev: majordomo.packages.${system};
 
-    packages.x86_64-linux.container =
-      import ./default.nix { nixpkgs = majordomo.outputs.nixpkgs; };
+      packages.${system} = {
+        container = import ./default.nix { inherit pkgs; };
+        deploy = majordomo.outputs.deploy { tag = "webservices/apache2-php74"; };
+      };
 
-    checks.x86_64-linux.container =
-      import ./test.nix { nixpkgs = majordomo.outputs.nixpkgs; };
+      checks.${system}.container =
+        import ./test.nix { inherit pkgs; };
 
-    defaultPackage.x86_64-linux = self.packages.x86_64-linux.container;
-
-    packages.x86_64-linux.deploy = majordomo.outputs.deploy { tag = "webservices/apache2-php74"; impure = true; };
-
-  };
+      defaultPackage.${system} = self.packages.${system}.container;
+    };
 }
