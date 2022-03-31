@@ -125,7 +125,7 @@ in maketestPhp {
       command = containerStructureTest {
         inherit pkgs;
         config = containerStructureTestConfig;
-        image = image.imageName;
+        inherit image;
       };
     })
     (dockerNodeTest {
