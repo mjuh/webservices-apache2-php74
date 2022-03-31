@@ -15,7 +15,7 @@
       defaultPackage.${system} = self.packages.${system}.container;
 
       checks.${system} = {
-        container = import ./test.nix { nixpkgs = majordomo.outputs.nixpkgs; };
+        container = import ./test.nix { pkgs = majordomo.outputs.nixpkgs; };
       };
     };
 }
