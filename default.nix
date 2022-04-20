@@ -15,7 +15,8 @@ let
     name = "apache2-rootfs-php74";
     src = ./rootfs;
     inherit zlib curl coreutils findutils apacheHttpdmpmITK apacheHttpd
-      mjHttpErrorPages s6 execline php74 logger;
+      s6 execline php74 logger;
+    mjHttpErrorPages = mj-http-error-pages;
     postfix = sendmail;
     ioncube = ioncube.v74;
     s6PortableUtils = s6-portable-utils;
@@ -39,10 +40,12 @@ pkgs.dockerTools.buildLayeredImage rec {
     coreutils
     libjpeg_turbo
     jpegoptim
-    (optipng.override{ inherit libpng ;})
+    (optipng.override { inherit libpng; })
     imagemagickBig
     ghostscript
-    gifsicle nss-certs.unbundled zip
+    gifsicle
+    nss-certs.unbundled
+    zip
     gcc-unwrapped.lib
     glibc
     zlib
@@ -73,19 +76,19 @@ pkgs.dockerTools.buildLayeredImage rec {
     };
   };
   extraCommands = ''
-      set -xe
-      ls
-      mkdir -p etc
-      mkdir -p bin
-      mkdir -p usr/local
-      mkdir -p opt
-      chmod 755 bin
-      ln -s ${nodePackages.svgo}/bin/svgo bin/svgo
-      ln -s ${php74} opt/php74
-      ln -s /bin usr/bin
-      ln -s /bin usr/sbin
-      ln -s /bin usr/local/bin
-      mkdir tmp
-      chmod 1777 tmp
-    '';
+    set -xe
+    ls
+    mkdir -p etc
+    mkdir -p bin
+    mkdir -p usr/local
+    mkdir -p opt
+    chmod 755 bin
+    ln -s ${nodePackages.svgo}/bin/svgo bin/svgo
+    ln -s ${php74} opt/php74
+    ln -s /bin usr/bin
+    ln -s /bin usr/sbin
+    ln -s /bin usr/local/bin
+    mkdir tmp
+    chmod 1777 tmp
+  '';
 }
